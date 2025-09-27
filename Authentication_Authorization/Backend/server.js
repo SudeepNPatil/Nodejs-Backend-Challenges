@@ -1,16 +1,18 @@
 import express from 'express';
 import cors from 'cors';
 import db from './Config/db.config.js';
-import auth from './Routes/auth.js';
+import userrouter from './Routes/user.router.js';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const app = express();
+
+db();
 
 app.use(cors());
 app.use(express.json());
 
-db();
-
-app.use('/', auth);
+app.use('/', userrouter);
 
 app.listen(process.env.PORT, () => {
   console.log(
